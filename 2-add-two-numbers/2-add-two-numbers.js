@@ -35,9 +35,8 @@ const addTwoNumbers = function(l1, l2) {
         previousRemain = 0;
         
         if (sum > 9) {
-            let [remaining, newSum] = splitToDigit(sum.toString());     
-            sum = newSum;
-            previousRemain = remaining;
+            sum = sum - 10;
+            previousRemain = 1;
         }
         
         if (!currNewList) {
