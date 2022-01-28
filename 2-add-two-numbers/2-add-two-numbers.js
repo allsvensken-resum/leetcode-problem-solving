@@ -53,7 +53,6 @@ const addTwoNumbers = function(l1, l2) {
         currNewList.next = new ListNode(previousRemain);
     }
     
-    console.log(headNode);
     return headNode;
 };
 
