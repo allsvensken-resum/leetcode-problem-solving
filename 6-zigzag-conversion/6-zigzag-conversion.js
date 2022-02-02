@@ -13,8 +13,6 @@ const convert = function(s, numRows) {
     let zigzagRow = 0; 
     let zigzag = initArrayOfEmptyString(numberOfRow); 
     
-    console.log(zigzag);
-    
     for (let i = 0; i < s.length; i++) {
         let currentChar = s.charAt(i);
         zigzag[zigzagRow] = zigzag[zigzagRow] + currentChar; 
