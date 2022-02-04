@@ -11,7 +11,7 @@ const maxSubArray = function(nums) {
     
     for (let i = 1; i < nums.length; i++) {
         let currVal = nums[i];
-        if (currVal > sum && currVal + sum < currVal) {
+        if (currVal + sum < currVal) {
             sum = currVal;
         } else {
             sum += currVal;
