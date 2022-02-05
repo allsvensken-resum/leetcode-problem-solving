@@ -21,12 +21,7 @@ const searchInsert = function(nums, target) {
     }
     
     
-    if (target < nums[midIdx]) {
-        if (midIdx === 0) return midIdx;
-        return midIdx
-    }
-    
-    return midIdx + 1
+    return target < nums[midIdx] ? midIdx : midIdx + 1 
 };
     
     
