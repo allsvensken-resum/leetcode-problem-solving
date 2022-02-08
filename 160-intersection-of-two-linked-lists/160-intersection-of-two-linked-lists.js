@@ -12,21 +12,22 @@
  * @return {ListNode}
  */
 const getIntersectionNode = function(headA, headB) {
-    let currA  = headA;
+    let visited = new Map();
+    let currA = headA;
+    let currB = headB;
+    
     while (currA) {
-        if (compareAnotherList(headB, currA)) return currA
+        visited.set(currA, true);
         currA = currA.next;
     }
-    return null; 
-};
-
-const compareAnotherList = (headNode, node) => {
-    let curr = headNode;
-    while (curr) {
-        if (node === curr) return true;
-        curr = curr.next;
+    
+    while (currB) {
+        if (visited.has(currB)) return currB;
+        currB = currB.next;
     }
     
-    return false;
-}
+    return null;
+};
+
+
 
