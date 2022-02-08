@@ -1,8 +1,7 @@
 
 var MinStack = function() {
-    this.min = -Infinity;
-    this.prevMin = -Infinity;
     this.stack = [];
+    this.minStack = [];
 };
 
 /** 
@@ -11,6 +10,20 @@ var MinStack = function() {
  */
 MinStack.prototype.push = function(val) {
     this.stack.push(val);
+    if (this.stack.length === 1) { 
+        this.minStack.push(0) 
+        return;
+    }; 
+    
+    let currMinIdx = this.minStack[this.minStack.length - 1];
+    let currMin = this.stack[currMinIdx];
+    
+    if (val <= currMin) {
+         this.minStack.push(this.stack.length - 1);     
+         return;
+    } 
+      
+    this.minStack.push(currMinIdx);
 };
 
 /**
@@ -18,6 +31,7 @@ MinStack.prototype.push = function(val) {
  */
 MinStack.prototype.pop = function() {
     this.stack.pop();
+    this.minStack.pop();
 };
 
 /**
@@ -31,18 +45,11 @@ MinStack.prototype.top = function() {
  * @return {number}
  */
 MinStack.prototype.getMin = function() {
-    let min = findMin(this.stack);
-    return min;
+    let topMin = this.minStack[this.minStack.length - 1];
+    return this.stack[topMin];
 };
 
-const findMin = (array) => {
-   let min = array[0];
-   for (let i = 1; i < array.length; i++) {
-       if (array[i] < min) min = array[i];
-   }
-    
-   return min;
-}
+
 
 /** 
  * Your MinStack object will be instantiated and called as such:
