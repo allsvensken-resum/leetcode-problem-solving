@@ -12,18 +12,18 @@
  * @return {ListNode}
  */
 const getIntersectionNode = function(headA, headB) {
-    let visited = new Map();
     let currA = headA;
     let currB = headB;
     
-    while (currA) {
-        visited.set(currA, true);
+    while (currA && currB) {
+        if (currA === currB) return currA;
         currA = currA.next;
-    }
-    
-    while (currB) {
-        if (visited.has(currB)) return currB;
         currB = currB.next;
+        if (!currA && currB) {
+           currA = headB 
+        } else if (!currB && currA) {
+            currB = headA 
+        }
     }
     
     return null;
