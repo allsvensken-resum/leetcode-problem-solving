@@ -10,20 +10,23 @@
  * @return {ListNode}
  */
 const reverseList = function(head) {
-    if (!head) return head;
-    let prev = null
-    let curr = head;
-    let next = curr.next;
-    while (curr) {
-        curr.next = prev;
-        prev = curr
-        if (next === null) {
-            head = curr;
-            break;
-        }
-        curr = next;
-        next = curr.next;
-    }
-    
-    return head;
+     let headRef = {
+         ref : null
+     }
+     
+     if(!head) return head;
+     helper(headRef, head, head.next);
+     head = null
+     return headRef.ref;
 };
+
+const helper = (head, curr, next) => {
+   if (!next) { 
+       head.ref = curr
+       return;
+   }; 
+    
+   helper(head, curr.next, curr.next.next); 
+   next.next = curr;
+   curr.next = null;
+}
