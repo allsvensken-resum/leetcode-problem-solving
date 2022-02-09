@@ -23,7 +23,6 @@ const findMissingRanges = function(nums, lower, upper) {
     }
     
     let upperDiff = upper - nums[nums.length - 1]    
-    console.log(upperDiff);
     if (upperDiff === 0) return ranges;
     ranges.push(createRange(nums[nums.length - 1] + 1, upper)) 
     return ranges;
