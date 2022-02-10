@@ -3,7 +3,21 @@
  * @return {number}
  */
 const lengthOfLastWord = function(s) {
-   let regex = /\s+/g; 
-   let words = s.trim().split(regex);
-   return words[words.length - 1].length;
+   let lengthCount = 0;
+   for (let i = s.length - 1; i >= 0; i--) {
+      let char = s.charAt(i); 
+      if (isNotSpace(char)) { 
+          lengthCount += 1 
+          continue;
+      };
+       
+      if (!isNotSpace(char) && lengthCount > 0) return lengthCount;
+   } 
+   
+   return lengthCount;
 };
+    
+const isNotSpace = (char) => {
+    let emptySpaceRegex = /\s+/g
+    return !char.match(emptySpaceRegex)
+}
