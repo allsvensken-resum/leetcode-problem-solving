@@ -18,6 +18,6 @@ const lengthOfLastWord = function(s) {
 };
     
 const isNotSpace = (char) => {
-    let emptySpaceRegex = /\s+/g
-    return !char.match(emptySpaceRegex)
+    let emptySpace = " "; 
+    return emptySpace !== char;
 }
