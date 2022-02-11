@@ -3,12 +3,11 @@
  * @return {boolean}
  */
 const containsDuplicate = function(nums) {
-   let sortedNums = nums.sort((a, b) => a - b); 
-   for (let i = 1; i < sortedNums.length; i++) {
-        let prev = sortedNums[i - 1];
-        let curr = sortedNums[i];
-        if (prev === curr) return true;
+   let visited = new Map();
+   for (let i = 0; i < nums.length; i++) {
+       if (visited.has(nums[i])) return true;
+       visited.set(nums[i], true);
    }
     
-   return false; 
+   return false 
 };
