@@ -10,15 +10,43 @@
  * @return {boolean}
  */
 const isPalindrome = function(head) {
-     let front = head;
-     const helper = (node) => {
-        if (!node) return true;
-        if (!helper(node.next)) return false; 
-        if(front.val !== node.val) return false;
-        front = front.next;
-        return true;
-     }
-     
-     return helper(head);
+    let endOfFirstHalf = findEndOfFirstHalf(head); 
+    let headOfSecondHalf = reverseLinkedList(endOfFirstHalf);
+    let currFirst = head;
+    let currReversed = headOfSecondHalf;
+    while (currFirst && currReversed) {
+        if (currFirst.val !== currReversed.val) return false;
+        currFirst = currFirst.next;
+        currReversed = currReversed.next;
+    } 
+    
+    let reversedSecondHalfBack = reverseLinkedList(headOfSecondHalf);
+    endOfFirstHalf.next = reversedSecondHalfBack;
+    return true;
 };
+
+const reverseLinkedList = (head) => {
+   let curr = head;
+   let next = curr.next;
+   let prev = null;
+   while (curr) {
+       curr.next = prev;
+       prev = curr;
+       if (!next) break;
+       curr = next;
+       next = curr.next;
+   }
+   
+   return curr;
+}
+
+const findEndOfFirstHalf = (head) => {
+    let slow = head;
+    let fast = head;
+    while (fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}
 
