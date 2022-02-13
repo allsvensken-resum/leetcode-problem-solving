@@ -10,25 +10,15 @@
  * @return {boolean}
  */
 const isPalindrome = function(head) {
-   let visited = []; 
-   helper(head, visited);
-   let left = 0;
-   let right = visited.length - 1;
-   while (left < right) {
-        if (visited[left] !== visited[right]) return false;   
-        left += 1
-        right -= 1
-   }
-   
-   return true;
+     let front = head;
+     const helper = (node) => {
+        if (!node) return true;
+        if (!helper(node.next)) return false; 
+        if(front.val !== node.val) return false;
+        front = front.next;
+        return true;
+     }
+     
+     return helper(head);
 };
 
-const helper = (node, visited) => {
-    if (node.next === null) {
-        visited.push(node.val)
-        return;
-    }     
-    
-    visited.push(node.val);
-    helper(node.next, visited);
-}
