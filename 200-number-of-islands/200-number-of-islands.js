@@ -7,7 +7,8 @@ const numIslands = function(grid) {
     let currIsLand = 0;
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[0].length; j++) {
-            if (dfs(grid, i, j, visited) > 0) currIsLand += 1;                 
+            if (!isLand(grid[i][j])) continue;
+            if (dfs(grid, i, j, visited) > 0) currIsLand += 1;
         }
     } 
     
