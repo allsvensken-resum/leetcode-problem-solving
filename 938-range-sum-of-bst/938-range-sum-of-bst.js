@@ -13,15 +13,21 @@
  * @return {number}
  */
 const rangeSumBST = function(root, low, high) {
-   return helper(root, low, high);
+   return dfs(root, low, high);
 };
 
-const helper = (node, low, high) => {
+const dfs = (node, low, high) => {
    let sum = 0;
    if (!node) return sum;
    if (node.val >= low && node.val <= high) sum += node.val;
-   let leftTreeSum = helper(node.left, low, high);
-   let rightTreeSum = helper(node.right, low, high);
-   sum = sum + leftTreeSum + rightTreeSum;
+    
+   if (low < node.val) {
+       sum += dfs(node.left, low, high); 
+   }
+   
+   if (high > node.val) {
+       sum += dfs(node.right, low, high); 
+   }
+    
    return sum;
 }
