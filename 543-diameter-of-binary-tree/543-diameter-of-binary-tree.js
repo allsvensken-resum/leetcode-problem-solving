@@ -11,29 +11,16 @@
  * @return {number}
  */
 const diameterOfBinaryTree = function(root) {
-   if (!root) return 0;
-   let q = [root];
-   let diameter = -Infinity;
-   while (q.length > 0) {
-      let curr = q.pop(); 
-      let currSum = findSumOfLeftAndRightSubTree(curr);
-      diameter = Math.max(currSum, diameter);
-      if (curr.left) q.unshift(curr.left);
-      if (curr.right) q.unshift(curr.right);
-   }
-    
-   return diameter;
+    let diameter = {max : -Infinity};
+    longestPath(root, diameter);
+    return diameter.max;
 };
 
-const findHeight = (node) => {
-    if (!node) return  -1;
-    let leftHeight = findHeight(node.left);
-    let rightHeight = findHeight(node.right);
+const longestPath = (node, diameter) => {
+    if (!node) return 0 ;
+    let leftHeight = longestPath(node.left, diameter);
+    let rightHeight = longestPath(node.right, diameter);
+    diameter.max = Math.max(diameter.max, leftHeight + rightHeight);
     return Math.max(leftHeight, rightHeight) + 1;
 }
 
-const findSumOfLeftAndRightSubTree = (root) => {
-   let leftHeight = findHeight(root.left) + 1;
-   let rightHeight = findHeight(root.right) + 1;
-   return leftHeight + rightHeight; 
-}
