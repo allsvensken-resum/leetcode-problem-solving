@@ -7,14 +7,6 @@
  */
 func deleteNode(node *ListNode) {
     curr := node
-    var prev *ListNode
-    for curr.Next != nil {
-        curr.Val = curr.Next.Val
-        prev = curr
-        curr = curr.Next
-    }
-    
-    if prev != nil {
-        prev.Next = nil
-    } 
+    curr.Val = curr.Next.Val
+    curr.Next = curr.Next.Next 
 }
